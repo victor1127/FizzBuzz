@@ -11,8 +11,8 @@ function GetValues()
         return;
     }
 
-    let numbers = GetFizzBuzz(startValue, endValue);
-    DisplayResults(numbers);
+    let results = GetFizzBuzz(startValue, endValue);
+    DisplayResults(results);
 
 
 }
@@ -35,18 +35,34 @@ function GetFizzBuzz(value,endValue)
 
 
 }
-function DisplayResults(numbers)
+function DisplayResults(results)
 {
-    let numTemplate="";
-    numbers.forEach(number => {
+    let tbdody = document.getElementById("tableresult");
+    let template =  document.getElementById("fbtemplate");
+    tbdody.innerHTML="";
 
-        numTemplate += `<tr><td>${number}</td></tr>`;
-    
-    });
+    for(var i = 0; i < results.length; i+=5)
+    {
+        let tableRow = document.importNode(template.content,true);
+        let rowCols =  tableRow.querySelectorAll("td");
+        FillOutTableData(rowCols,results,i);
+        tbdody.appendChild(tableRow);
+    }
 
-    document.getElementById("tableresult").innerHTML=numTemplate;
 
 }
+function FillOutTableData(rowCols,results,index)
+{
+    for(var i=0; i < rowCols.length; i++)
+    {
+        rowCols[i].classList.add(results[index]);
+        rowCols[i].textContent = results[index];
+        index++;
+    }
+
+}
+
+
 function IsValidEntry(value)
 {
     let sValue = parseInt(value);

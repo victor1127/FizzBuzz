@@ -91,3 +91,17 @@ code[class*="language-"], pre[class*="language-"]
     font-size: 3em;
 
 }
+
+.Fizz
+{
+    color: #1976D2;
+}
+.Buzz
+{
+    color: #009688;
+}
+.FizzBuzz
+{
+    color: darkred;
+    font-weight: bold;
+}

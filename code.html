@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>Count+: A Coding Project By Victor Sosa</title>
+    <title>Fizz Buzz: A Coding Project By Victor Sosa</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
     <link href="css/side.css" rel="stylesheet">
 
     <!--Window Icon-->
-    <link rel="icon" type="image/png" href="/img/logo.png"/>
+    <link rel="icon" type="image/png" href="/img/FIZZbuzz2hd.jpg"/>
 
     <!--Social icons-Ionic-->
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
@@ -29,7 +29,7 @@
 <!--navigation-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html"><img class="navimg" src="/img/logo.png"></a>
+            <a class="navbar-brand" href="index.html"><img class="navimg" src="/img/FIZZbuzz2.png"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -60,23 +60,135 @@
     <main class="flex-shrink-0">
         <div class="container px-5 py-5">
             <div class="row py-5 row-cols-1 row-cols-md-2">
-                <!--The code-->
+                <!--code description-->
+                <div class="col-md-4 pt-2">
+                <h4>GetValues()</h4>
+                <p>The main purpuse of this method is getting the initial values from the user, then it calls other methods
+                    to validate entries, generate the results and display them to the user.
+                </p>
+                </div>
+                <!--GetValues method-->
                 <div class="col-md-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        function DisplayHelloWorld()
+                        function GetValues()
                         {
-                            alert("Hello world");
+                            let startValue= document.getElementById("startvalue").value;
+                            let endValue= document.getElementById("endtvalue").value;
+                            let isValidStartValue= IsValidEntry(startValue);
+                            let isValidEndValue= IsValidEntry(endValue);
+                        
+                            if(!isValidStartValue || !isValidEndValue)
+                            {
+                                alert("Enter interger values only");
+                                return;
+                            }
+                        
+                            let results = GetFizzBuzz(startValue, endValue);
+                            DisplayResults(results);
+                            
                         }
                     </code>
                     </pre>
                 </div>
-
                 <!--code description-->
-                <div class="col-md-4 pt-2">
-                    <p>The code is structed in one function.</p>
-                    <h5>Hello, world</h5>
-                    <p>Hello world is a function that display an alert with a message of "Hello, world"</p>
+                <div class="col-md-4">
+                    <h4 class="pt-3">IsValidEntry()</h4>
+                    <p>Validates the user entry, start and end values are intergers</p>
                 </div>
+                <!--IsValidEntry method-->
+                <div class="col-md-8">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        function IsValidEntry(value)
+                        {
+                            let sValue = parseInt(value);
+                            return (Number.isInteger(sValue));    
+                        }
+                    </code>
+                    </pre>
+                </div>
+                <!--code description-->
+                <div class="col-md-4">
+                    <h4 class="pt-3">GetFizzBuzz()</h4>
+                    <p>This method evaluates weather a given number is deviseble by 3 or 5,
+                        in case it is devisible by 3 it will store 'Fizz' in the array instead of the number, or 
+                        'Buzz' if devisible by 5, in case of being devisible by both, it will store 'FizzBuzz',
+                        otherwise, will store the actual value before returning an array. 
+                    </p>
+                </div>
+                <!--GerFizzBuzz method-->
+                <div class="col-md-8">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        function GetFizzBuzz(value,endValue)
+                        {
+                            let output=[];
+                            let message="";
+                        
+                            for(let i=value;i<=endValue;i++)
+                            {
+                                if(i%3==0) message+="Fizz";
+                                if(i%5==0) message+="Buzz";
+                                if(message=="") message=i;    
+                                
+                                output.push(message);
+                                message="";
+                            }
+                        
+                            return output;
+                        
+                        }
+                    </code>
+                    </pre>
+                </div>
+                <!--code description-->
+                <div class="col-md-4">
+                    <h4 class="pt-3">DisplayResults()</h4>
+                    <p>DisplayResults is a method that iterates throught a given array to assign values to a table 
+                        which will display the results supplied by the 'GetFizzBuzz' method. To assign the values to each table data
+                        this function make use of another method named 'FillOutTableData()'.
+                    </p>
+                </div>
+                <!--DisplayResults method-->
+                <div class="col-md-8">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        function DisplayResults(results)
+                        {
+                            let tbdody = document.getElementById("tableresult");
+                            let template =  document.getElementById("fbtemplate");
+                            tbdody.innerHTML="";
+                        
+                            for(var i = 0; i < results.length; i+=5)
+                            {
+                                let tableRow = document.importNode(template.content,true);
+                                let rowCols =  tableRow.querySelectorAll("td");
+                                FillOutTableData(rowCols,results,i);
+                                tbdody.appendChild(tableRow);
+                            }             
+                        }
+                    </code>
+                    </pre>
+                </div>
+                <!--code description-->
+                <div class="col-md-4">
+                    <h4>FillOutTableData()</h4>
+                    <p>This function takes 3 parameters,'Array: all the table data for the table', 'Array: results', 'int: index'.
+                        It will iterate throught the number of table data assigning a value and a CSS class to each one.
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <pre class="line-numbers"><code class="language-javascript">
+                        function FillOutTableData(rowCols,results,index)
+                        {
+                            for(var i=0; i < rowCols.length; i++)
+                            {
+                                rowCols[i].classList.add(results[index]);
+                                rowCols[i].textContent = results[index];
+                                index++;
+                            }
+                        
+                        }
+                    </code>
+                   </pre>
+                </div>           
             </div>         
         </div>
     </main>

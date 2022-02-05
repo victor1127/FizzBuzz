@@ -14,8 +14,8 @@ function GetValues()
     let results = GetFizzBuzz(startValue, endValue);
     DisplayResults(results);
 
-
 }
+
 function GetFizzBuzz(value,endValue)
 {
     let output=[];
@@ -33,8 +33,8 @@ function GetFizzBuzz(value,endValue)
 
     return output;
 
-
 }
+
 function DisplayResults(results)
 {
     let tbdody = document.getElementById("tableresult");
@@ -49,8 +49,8 @@ function DisplayResults(results)
         tbdody.appendChild(tableRow);
     }
 
-
 }
+
 function FillOutTableData(rowCols,results,index)
 {
     for(var i=0; i < rowCols.length; i++)
@@ -62,11 +62,9 @@ function FillOutTableData(rowCols,results,index)
 
 }
 
-
 function IsValidEntry(value)
 {
     let sValue = parseInt(value);
-    return (Number.isInteger(sValue));
-    
+    return (Number.isInteger(sValue));    
 }
 
